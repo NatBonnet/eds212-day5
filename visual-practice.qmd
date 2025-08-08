@@ -1,0 +1,50 @@
+---
+title: "Quarto Practice"
+format: html
+editor: visual
+execute: 
+  warning: false
+---
+
+```{r, echo=FALSE}
+#| warning: false
+#| message: false
+library(tidyverse)
+
+```
+
+### Don't show code or outputs
+
+```{r, echo=FALSE}
+#| include: false #not being shown: could be good for not showing specific code chunks- where echo=false could cause some issues with ggpot
+#| warning: false
+head(starwars)
+dim(starwars)
+
+```
+
+```{r}
+ggplot(data =  starwars, aes(x = height, y= mass, color = mass)) +
+  geom_point()+
+  labs(x ="height (cm)", y= "mass (kg)") +
+  theme_minimal()
+```
+
+```{r}
+#| warning: false
+#| fig-cap: "caption text"
+#| fig-alt: "alternative text"
+ggplot(data = starwars, aes(x = height)) +
+  geom_histogram(color = "red", fill = "purple")
+```
+
+```{r}
+# find summary stats for starwars dataset
+mean_height <- mean(starwars$height, na.rm = TRUE) # remove NAs from height values
+mean_height
+median_height <- median(starwars$height, na.rm=TRUE)
+var_height <- var(starwars$height, na.rm=TRUE)
+sd_height <- sd(starwars$height, na.rm=TRUE)
+```
+
+the mean height of characters in star wars is `r round(mean_height, 1)` centimeters.
